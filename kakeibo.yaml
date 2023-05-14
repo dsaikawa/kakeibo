@@ -1,0 +1,304 @@
+openapi: 3.0.0
+info:
+  title: 家計簿管理API
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /incomes:
+    get:
+      tags:
+        - 収入データ
+      summary: 収入データの取得
+      parameters:
+        - name: start_date
+          in: query
+          description: データの取得開始日（YYYY-MM-DD）
+          schema:
+            type: string
+          required: true
+        - name: end_date
+          in: query
+          description: データの取得終了日（YYYY-MM-DD）
+          schema:
+            type: string
+          required: true
+        - name: category
+          in: query
+          description: データのカテゴリ名
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 収入データの取得に成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: データのID
+                    date:
+                      type: string
+                      description: データの日付（YYYY-MM-DD）
+                    category:
+                      type: string
+                      description: データのカテゴリ名
+                    amount:
+                      type: integer
+                      description: データの金額
+                    description:
+                      type: string
+                      description: データの備考
+    post:
+      tags:
+        - 収入データ
+      summary: 収入データの登録
+      requestBody:
+        description: 収入データの詳細
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  description: データの日付（YYYY-MM-DD）
+                category:
+                  type: string
+                  description: データのカテゴリ名
+                amount:
+                  type: integer
+                  description: データの金額
+                description:
+                  type: string
+                  description: データの備考
+      responses:
+        "201":
+          description: 収入データの登録に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 登録されたデータのID
+  /incomes/{id}:
+    put:
+      tags:
+        - 収入データ
+      summary: 収入データの編集
+      parameters:
+        - name: id
+          in: path
+          description: 編集対象のデータのID
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: 編集するデータの詳細
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  description: データの日付（YYYY-MM-DD
+                category:
+                  type: string
+                  description: データのカテゴリ名
+                amount:
+                  type: integer
+                  description: データの金額
+                description:
+                  type: string
+                  description: データの備考
+      responses:
+        "200":
+          description: 収入データの編集に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 編集されたデータのID
+    delete:
+      tags:
+        - 収入データ
+      summary: 収入データの削除
+      parameters:
+        - name: id
+          in: path
+          description: 削除対象のデータのID
+          schema:
+            type: integer
+          required: true
+      responses:
+        "204":
+          description: 収入データの削除に成功
+  /expenses:
+    get:
+      tags:
+        - 支出データ
+      summary: 支出データの取得
+      parameters:
+        - name: start_date
+          in: query
+          description: データの取得開始日（YYYY-MM-DD）
+          schema:
+            type: string
+          required: true
+        - name: end_date
+          in: query
+          description: データの取得終了日（YYYY-MM-DD）
+          schema:
+            type: string
+          required: true
+        - name: category
+          in: query
+          description: データのカテゴリ名
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 支出データの取得に成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: データのID
+                    date:
+                      type: string
+                      description: データの日付（YYYY-MM-DD）
+                    category:
+                      type: string
+                      description: データのカテゴリ名
+                    amount:
+                      type: integer
+                      description: データの金額
+                    description:
+                      type: string
+                      description: データの備考
+    post:
+      tags:
+        - 支出データ
+      summary: 支出データの登録
+      requestBody:
+        description: 支出データの詳細
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  description: データの日付（YYYY-MM-DD）
+                category:
+                  type: string
+                  description: データのカテゴリ名
+                amount:
+                  type: integer
+                  description: データの金額
+                description:
+                  type: string
+                  description: データの備考
+      responses:
+        "201":
+          description: 支出データの登録に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 登録されたデータのID
+  /expenses/{id}:
+    put:
+      tags:
+        - 支出データ
+      summary: 支出データの編集
+      parameters:
+        - name: id
+          in: path
+          description: 編集対象のデータのID
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: 編集する支出データの詳細
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  description: データの日付（YYYY-MM-DD）
+                category:
+                  type: string
+                  description: データのカテゴリ名
+                amount:
+                  type: integer
+                  description: データの金額
+                description:
+                  type: string
+                  description: データの備考
+      responses:
+        "200":
+          description: 支出データの編集に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 編集されたデータのID
+    delete:
+      tags:
+        - 支出データ
+      summary: 支出データの削除
+      parameters:
+        - name: id
+          in: path
+          description: 削除対象のデータのID
+          schema:
+            type: integer
+          required: true
+      responses:
+        "204":
+          description: 支出データの削除に成功
+components:
+  schemas:
+    Data:
+      type: object
+      required:
+        - date
+        - category
+        - amount
+      properties:
+        date:
+          type: string
+          description: データの日付（YYYY-MM-DD）
+        category:
+          type: string
+          description: データのカテゴリ名
+        amount:
+          type: integer
+          description: データの金額
+        description:
+          type: string
+          description: データの備考

@@ -1,0 +1,11 @@
+{
+  "name": "kakeibo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "elm-spa server"
+  },
+  "author": "",
+  "license": "ISC"
+}
