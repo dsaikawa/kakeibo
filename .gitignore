@@ -3,3 +3,4 @@ backend/dist/
 frontend/.elm-spa
 frontend/elm-stuff
 frontend/public/dist/elm.js
+docker/data
